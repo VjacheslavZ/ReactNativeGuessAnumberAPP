@@ -8,11 +8,15 @@ import { GameOverScreen } from "./screens/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
-  const [guessRouds, setGuessRounds] = useState(0);
+  const [guessRounds, setGuessRounds] = useState(0);
+
+  const configureNewGame = () => {
+    setGuessRounds(0);
+    setUserNumber(null);
+  };
 
   const startGameHandler = (selectedNumber) => {
     setUserNumber(selectedNumber);
-    setGuessRounds(0);
   };
 
   const gameOverHandler = numOfRounds => {
@@ -21,10 +25,10 @@ export default function App() {
 
   let content = <StartGameScreen onStartGame={startGameHandler} />;
 
-  if (userNumber && guessRouds <= 0) {
+  if (userNumber && guessRounds <= 0) {
     content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
-  } else if (guessRouds > 0) {
-    content = <GameOverScreen/>
+  } else if (guessRounds > 0) {
+    content = <GameOverScreen onRestart={configureNewGame} roundsNumber={guessRounds } userNumber={userNumber}/>
   }
 
   return (

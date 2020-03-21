@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text, Button } from 'react-native';
 
-export const GameOverScreen = () => {
+export const GameOverScreen = ({ roundsNumber, userNumber, onRestart }) => {
   return (
     <View style={styles.screen}>
       <Text>Game is over</Text>
+      <Text>Number of rounds: {roundsNumber}</Text>
+      <Text>Number was: {userNumber}</Text>
+      <Button title='NEW GAME' onPress={onRestart}/>
     </View>
   )
 };
